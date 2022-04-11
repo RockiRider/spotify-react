@@ -22,7 +22,6 @@ const Login = () => {
 
     const handleLogin = () => {
         const STATE = randomString(32);
-        console.log("Here");
         const URL = `${AUTH_ENDPOINT}?client_id=${encodeURIComponent(CLIENT_ID)}&scope=${SCOPE}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${encodeURIComponent(RESPONSE_TYPE)}&state=${encodeURIComponent(STATE)}`;
         window.localStorage.setItem("state",STATE);
         window.location = URL;

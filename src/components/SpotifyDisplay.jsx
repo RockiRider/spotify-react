@@ -18,12 +18,13 @@ const SpotifyDisplay = () => {
                 'Content-Type': `application/json`
             },
             params:{
-                limit:'10',
+                limit:'50',
                 before: Date.now(),
             }
         }).then(data => {
             const trackData = data.data.items;
             setTrackData(trackData);
+            console.log(trackData);
         }).catch(err => {
             console.log(err);
         })

@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { UserContext } from "../context/userContext";
 import { TrackContext, FilterContext } from "../context/trackContext";
 import styles from '../styles/Grid.module.css';
-import { ListItem,List, Avatar,ListItemAvatar,ListItemText,Typography} from "@mui/material";
+import { ListItem,List, Avatar,ListItemAvatar,ListItemText,Typography, Pagination} from "@mui/material";
 import RefreshIcon from '@mui/icons-material/Refresh';
 import axios from "axios";
 
@@ -12,6 +12,10 @@ const Grid = () => {
     const [filter, setFilter] = useContext(FilterContext);
     const [trackData,setTrackData] = useContext(TrackContext);
     const [tracks, setTracks] = useState([]);
+
+    const [ currentPage, setCurrentPage] = useState(1);
+    const [ tracksPerPage, setTracksPerPage] = useState(10);
+
 
     useEffect(()=> {
         setTracks(trackData);
@@ -39,7 +43,7 @@ const Grid = () => {
                 'Content-Type': `application/json`
             },
             params:{
-                limit:'10',
+                limit:'50',
                 before: Date.now(),
             }
         }).then(data => {
@@ -49,7 +53,17 @@ const Grid = () => {
             console.log(err);
         })
     }
+
+    const indexOfLastTrack = currentPage * tracksPerPage;
+    const indexOfFirstTrack = indexOfLastTrack - tracksPerPage;
+    const currentTracks = tracks.slice(indexOfFirstTrack,indexOfLastTrack);
+    const paginationCount = Math.ceil(tracks.length / tracksPerPage);
     
+    const handlePagination = (event) => {
+        const num = parseInt(event.target.textContent)
+        setCurrentPage(num);
+    }
+
     return(
         <div className={styles.gridWrapper}>
             <div className={styles.gridArea}>
@@ -59,10 +73,10 @@ const Grid = () => {
                 </div>
                 <List sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
 
-                    {tracks.map((item,i) => {
+                    {currentTracks.map((item,i) => {
                         const artistsList = item.track.artists.map(el => el.name).join(', ');
                         return(
-                            <ListItem alignItems="flex-start" key={item.track.id}>
+                            <ListItem alignItems="flex-start" key={i}>
                                 <ListItemAvatar>
                                     <Avatar alt="Album Image" src={item.track.album.images[0].url} />
                                 </ListItemAvatar>
@@ -84,8 +98,8 @@ const Grid = () => {
                             </ListItem>
                         )
                     })}
-
                 </List>
+                <Pagination page={currentPage} onChange={handlePagination} count={paginationCount}/>
             </div>
         </div>
     )

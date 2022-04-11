@@ -1,6 +1,7 @@
 import React, {useEffect, useContext, useState} from "react";
 import { TrackContext, FilterContext } from "../context/trackContext";
-import { ListItem,List, ListItemButton} from "@mui/material";
+import { ListItem,List, ListItemButton, Pagination} from "@mui/material";
+import styles from '../styles/SidebarMain.module.css';
 
 const SidebarMain = () => {
 
@@ -8,6 +9,9 @@ const SidebarMain = () => {
     const [artists, setArtists] = useState([]);
     const [filter, setFilter] = useContext(FilterContext);
     const [selectedIndex, setSelectedIndex] = useState(null);
+
+    const [ currentPage, setCurrentPage] = useState(1);
+    const [ artistsPerPage, setArtistsPerPage] = useState(12);
 
     useEffect(() => {
         const inFilter = window.localStorage.getItem("filter");
@@ -39,7 +43,6 @@ const SidebarMain = () => {
     
 
     const handleListItemClick = (event, index) => {
-
         if(selectedIndex !== index){
             setFilter(artists[index]);
             window.localStorage.setItem("filter",artists[index]);
@@ -47,21 +50,31 @@ const SidebarMain = () => {
         }else{
             setFilter('');
             window.localStorage.removeItem("filter");
-            setSelectedIndex(null)
+            setSelectedIndex(null);
         }
     };
+    const handlePagination = (event) => {
+        const num = parseInt(event.target.textContent)
+        setCurrentPage(num);
+    }
+
+    const indexOfLastTrack = currentPage * artistsPerPage;
+    const indexOfFirstTrack = indexOfLastTrack - artistsPerPage;
+    const currentArtists = artists.slice(indexOfFirstTrack,indexOfLastTrack);
+    const paginationCount = Math.ceil(artists.length / artistsPerPage);
 
     return(
-        <div>
+        <div className={styles.artistsArea}>
             <List sx={{ width: '100%', maxWidth: '100%' }}>
-                {artists.map((item,i) => {
+                {currentArtists.map((item,i) => {
                     return(
                         <ListItem key={i} alignItems="flex-start">
-                            <ListItemButton selected={selectedIndex === i} onClick={(event) => handleListItemClick(event, i)}>{item}</ListItemButton>
+                            <ListItemButton selected={selectedIndex === i} onClick={(event) => handleListItemClick(event, i+indexOfFirstTrack )}>{item}</ListItemButton>
                         </ListItem>
                     )
                 })}
             </List>
+            <Pagination page={currentPage} onChange={handlePagination} count={paginationCount}/>
         </div>
     )
 }
