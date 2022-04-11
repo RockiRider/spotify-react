@@ -4,11 +4,11 @@ import { Button } from '@mui/material';
 
 const Login = () => {
 
-    const CLIENT_ID = '37901a9fa9424f2e8957a5584170f6e6';
-    const REDIRECT_URI = 'http://localhost:3000';
-    const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
-    const RESPONSE_TYPE = 'token';
-    const SCOPE = 'user-read-private user-read-recently-played';
+    const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+    const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+    const AUTH_ENDPOINT = process.env.REACT_APP_AUTH_ENDPOINT;
+    const RESPONSE_TYPE = process.env.REACT_APP_RESPONSE_TYPE;
+    const SCOPE = process.env.REACT_APP_SCOPE;
 
     const randomString = (length) => {
         let result = '';
