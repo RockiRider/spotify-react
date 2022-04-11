@@ -1,8 +1,13 @@
 # React Spotify App
 
 ## Running the SPA
-Populate the `.env.local` by following the `.env.example` - you will require a Client ID from your Spotify Dev account
-I have included the other values required in the example.
+Populate the `.env.local` by following the `.env.example` - You will also need to setup a Spotify Developer Account, see the instructions below.
+
+### Spotify Setup
+1. Create an App on the Spotify Dev Portal
+2. Get the Client ID
+3. Set the Redirect URI to `http://localhost:3000` as shown below:
+![Screenshot Example](/public/images/screenshot.png)
 
 Use `npm start`
 
