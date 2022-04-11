@@ -1,5 +1,6 @@
 import React, {useContext} from 'react'
 import { UserContext } from "../context/userContext";
+import { Button } from '@mui/material';
 
 const Login = () => {
 
@@ -7,6 +8,7 @@ const Login = () => {
     const REDIRECT_URI = 'http://localhost:3000';
     const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
     const RESPONSE_TYPE = 'token';
+    const SCOPE = 'user-read-private user-read-recently-played';
 
     const randomString = (length) => {
         let result = '';
@@ -19,16 +21,15 @@ const Login = () => {
     }
 
     const handleLogin = () => {
-        console.log('HEREEE');
         const STATE = randomString(32);
         console.log("Here");
-        const URL = `${AUTH_ENDPOINT}?client_id=${encodeURIComponent(CLIENT_ID)}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${encodeURIComponent(RESPONSE_TYPE)}&state=${encodeURIComponent(STATE)}`;
+        const URL = `${AUTH_ENDPOINT}?client_id=${encodeURIComponent(CLIENT_ID)}&scope=${SCOPE}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${encodeURIComponent(RESPONSE_TYPE)}&state=${encodeURIComponent(STATE)}`;
         window.localStorage.setItem("state",STATE);
         window.location = URL;
     }
 
     return (
-        <button onClick={handleLogin}>Login</button>
+        <Button variant="contained" onClick={handleLogin}>Login</Button>
     )
 }
 
@@ -43,7 +44,7 @@ const Logout = () => {
     }
 
     return (
-        <button onClick={handleLogout}>Logout</button>
+        <Button variant="contained" onClick={handleLogout}>Logout</Button>
     )
 }
 

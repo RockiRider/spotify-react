@@ -1,13 +1,16 @@
 import './styles/App.css';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Login, Logout } from './components/AuthFlow';
 import { UserContext } from './context/userContext';
-
-
+import { LoginDisplay } from './components/LoginDisplay';
+import { Grid } from './components/Grid';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { SpotifyDisplay } from './components/SpotifyDisplay';
 
 function App() {
 
   const [token, setToken] = useContext(UserContext);
+  const darkTheme = createTheme({ palette: { mode: 'dark' } });
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -31,9 +34,11 @@ function App() {
   },[])
 
   return (
+    <ThemeProvider theme={darkTheme}>
       <div className="App">
-        {!token ? <Login/> : <Logout/>}
+        {!token ? <LoginDisplay/> : <SpotifyDisplay/>}
       </div>
+    </ThemeProvider>
   );
 }
 

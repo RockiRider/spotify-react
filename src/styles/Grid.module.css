@@ -1,0 +1,8 @@
+.gridWrapper{
+    width: auto;
+    height: auto;
+}
+.gridArea{
+    width: 100%;
+    padding: 3em;
+}
