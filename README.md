@@ -26,7 +26,7 @@ I have included the other values required in the example.
 ### What would I do if this was an actual Production App?
 
 - I wouldn't do this via a SPA and I would use NextJS instead as out of the box its more production ready and I would be able to utilise the server for storing access tokens, instead of exposing my Spotify App's Client ID to the world.
-- If I **had to** do this again as an SPA I wouldn't use the Implicit Grant Flow and instead use this (Authentication method)[https://developer.spotify.com/documentation/general/guides/authorization/code-flow/], as the Spotify docs recommends. Mainly for the refresh token ability.
+- If I **had to** do this again as an SPA I wouldn't use the Implicit Grant Flow and instead use this [Authentication method](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/), as the Spotify docs recommends. Mainly for the refresh token ability.
 - It would be good to use Jest or another testing framework
 - It would be good if the App was actually responsive to other screen-sizes etc
 - I would be using SCSS over CSS for sure and might possibly drop Material UI as a dependacy.
