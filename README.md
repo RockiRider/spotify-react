@@ -7,7 +7,7 @@ Populate the `.env.local` by following the `.env.example` - You will also need t
 1. Create an App on the Spotify Dev Portal
 2. Get the Client ID
 3. Set the Redirect URI to `http://localhost:3000` as shown below:
-![Screenshot Example](/public/images/screenshot.png)
+![Screenshot Example](/public/screenshot.png)
 
 Use `npm start`
 
