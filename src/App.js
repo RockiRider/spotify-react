@@ -1,9 +1,8 @@
 import './styles/App.css';
 import React, { useEffect, useContext } from 'react';
-import { Login, Logout } from './components/AuthFlow';
 import { UserContext } from './context/userContext';
+import { FilterProvider, TrackProvider } from './context/trackContext';
 import { LoginDisplay } from './components/LoginDisplay';
-import { Grid } from './components/Grid';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { SpotifyDisplay } from './components/SpotifyDisplay';
 
@@ -36,7 +35,12 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">
-        {!token ? <LoginDisplay/> : <SpotifyDisplay/>}
+        {!token ? <LoginDisplay/> : 
+          <TrackProvider>
+            <FilterProvider>
+              <SpotifyDisplay/>
+            </FilterProvider>
+          </TrackProvider>}
       </div>
     </ThemeProvider>
   );

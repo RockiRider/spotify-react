@@ -21,7 +21,9 @@ const Profile = () => {
             if(results.display_name)setName(results.display_name);
             if(results.images.length > 0)setImage(results.images[0]);
         }).catch(err => {
-            console.log(err);
+            localStorage.removeItem('state');
+            localStorage.removeItem('token');
+            setToken('');
         })
     },[])
 

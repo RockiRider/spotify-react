@@ -1,8 +1,18 @@
 .gridWrapper{
-    width: auto;
+    width: calc(100% - 25em);
     height: auto;
 }
 .gridArea{
-    width: 100%;
+    width: auto;
     padding: 3em;
+}
+.headingArea{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2em;
+}
+
+.headingArea svg{
+    cursor: pointer;
 }
