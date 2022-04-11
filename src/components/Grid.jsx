@@ -51,6 +51,9 @@ const Grid = () => {
             setTrackData(trackData);
         }).catch(err => {
             console.log(err);
+            localStorage.removeItem('state');
+            localStorage.removeItem('token');
+            setToken('');
         })
     }
 

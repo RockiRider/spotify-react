@@ -24,9 +24,11 @@ const SpotifyDisplay = () => {
         }).then(data => {
             const trackData = data.data.items;
             setTrackData(trackData);
-            console.log(trackData);
         }).catch(err => {
             console.log(err);
+            localStorage.removeItem('state');
+            localStorage.removeItem('token');
+            setToken('');
         })
     },[])
 
