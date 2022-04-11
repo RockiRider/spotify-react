@@ -4,6 +4,10 @@
 Populate the `.env.local` by following the `.env.example` - you will require a Client ID from your Spotify Dev account
 I have included the other values required in the example.
 
+Use `npm start`
+
+- Built with `node v16.14.2` and `npm v8.3.1`
+
 ## Task Requirements
 - [x] A user should be able to view a grid of their recently played tracks.
 
